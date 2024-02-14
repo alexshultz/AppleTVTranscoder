@@ -1,6 +1,6 @@
-# Video Transcoding System for Apple Devices
+# Video Transcoding System for AppleTV
 
-This project provides a comprehensive solution for transcoding video files to the H.265 format, optimized for playback on Apple devices. It leverages the efficiency of H.265 to reduce file sizes while maintaining high video quality. The system is designed to run on a network of Apple Silicon Macs, processing video files stored on a NAS.
+This project provides a comprehensive solution for transcoding video files to the H.265 format, optimized for playback on Apple devices, focusing on AppleTV. It leverages the efficiency of H.265 to reduce file sizes while maintaining high video quality. The system is designed to run on a network of Apple Silicon Macs, processing video files stored on a NAS.
 
 ## Features
 
@@ -13,7 +13,7 @@ This project provides a comprehensive solution for transcoding video files to th
 
 ## System Requirements
 
-- macOS Sonoma (macOS 14) running on Apple Silicon Macs.
+- macOS Sonoma (macOS 14) running on Apple Silicon Macs. Probably will work on other versions but not tested.
 - `ffmpeg` and `ffprobe` installed and accessible in the system's PATH.
 - Python 3.8 or newer.
 
@@ -25,7 +25,10 @@ This project provides a comprehensive solution for transcoding video files to th
 2. Ensure `ffmpeg` and `ffprobe` are installed:
    ```bash
    brew install ffmpeg
-3. Install required Python dependencies:
+3. Ensure `psutil` is installed:
+   ```bash
+   pip install psutil
+4. Install required Python dependencies:
    ```bash
    pip install -r requirements.txt
 
@@ -46,4 +49,4 @@ Distributed under the MIT License. See `LICENSE` for more information.
 ## Acknowledgments
 
 - Thanks to the [ffmpeg team](https://ffmpeg.org/) for their incredible tool.
-- [Your Name] for project initiation and development.
+- Thanks to several AI groups, including `ChatGPT`, `Gemini`, and `GitHub Copilot` for creating great help to get me started on this project.
