@@ -1,5 +1,6 @@
 import subprocess
 import json
+from typing import List, Any, Dict
 
 
 class MediaFile:
@@ -13,9 +14,13 @@ class MediaFile:
         self.bitrate = self.get_bitrate()
         self.needs_downscaling = self.determine_downscaling()
 
-    def run_ffprobe(self, command):
+    def run_ffprobe(self, command: List[str]) -> Dict[str, Any]:
         """
         Utility method to run ffprobe commands and return the parsed JSON output.
+        Args:
+        - command: A list of strings representing the ffprobe command to be executed.
+        Returns:
+        - A dictionary representing the parsed JSON output from ffprobe.
         """
         result = subprocess.run(command, text=True, capture_output=True)
         try:
@@ -27,27 +32,30 @@ class MediaFile:
         """
         Uses ffprobe to determine the codec of the original video file.
         """
-        command = [
+        ffprobe_command = [
             'ffprobe', '-v', 'quiet', '-print_format', 'json',
             '-show_streams', '-select_streams', 'v:0', self.file_path
         ]
-        output = self.run_ffprobe(command)
-        codec_name = output['streams'][0]['codec_name']
+        ffprobe_output = self.run_ffprobe(ffprobe_command)
+        codec_name = ffprobe_output['streams'][0]['codec_name']
         return codec_name
 
     def get_resolution(self):
         """
-        Use ffprobe to determine resolution.
+        Uses ffprobe to determine the resolution of the video file.
         Returns a tuple (width, height).
         """
-        command = [
+        # Construct the ffprobe command
+        ffprobe_command = [
             "ffprobe", "-v", "error", "-select_streams", "v:0",
             "-show_entries", "stream=width,height",
             "-of", "json", self.file_path
         ]
-        output = self.run_ffprobe(command)
-        width = output['streams'][0]['width']
-        height = output['streams'][0]['height']
+        # Run ffprobe command and capture the output
+        ffprobe_output = self.run_ffprobe(ffprobe_command)
+        # Extract width and height from the output
+        width = ffprobe_output['streams'][0]['width']
+        height = ffprobe_output['streams'][0]['height']
         return (width, height)
 
     def get_bitrate(self) -> int:

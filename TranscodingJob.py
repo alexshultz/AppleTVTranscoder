@@ -48,7 +48,7 @@ class TranscodingJob:
         # Define the base command for ffmpeg. Note: You might need to adjust paths or add options.
         base_command = [
             "ffmpeg", "-y", "-i", self.media_file.file_path,
-            "-c:v", "libx265", "-preset", "slow",
+            "-c:v", " ", "-preset", "slow",
             "-b:v", "8000k"
         ]
 
